@@ -1,0 +1,5 @@
+FONTS = [
+    "Calibri",
+    "Arial",
+    "Algerian",
+]
