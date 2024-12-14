@@ -1,1 +1,0 @@
-pyinstaller --onefile --windowed --add-data "project/img/*;img" --add-data "project/data/*;data" --icon=project/img/note.ico project/main.py
