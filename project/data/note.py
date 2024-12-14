@@ -10,12 +10,23 @@ from datetime import datetime
 constantes = [FONTS]
 
 class Note:
+<<<<<<< HEAD
     """
     Classe principal para o editor de texto Note, implementado com Tkinter.
     Permite criar, abrir, editar e salvar arquivos de texto, além de funcionalidades como zoom, modo escuro e status do cursor.
     """
     def __init__(self, **kwargs):
         # Inicializa a janela principal do Tkinter
+=======
+    """ 
+    Classe para criar um editor de texto Tkinter.
+    """
+
+    def __init__(self, **kwargs):
+        """
+        Inicializa a janela principal do editor de texto e configura os componentes da interface.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         self.root = Tk()
         self.file = None  # Variável para armazenar o caminho do arquivo atual
         self.root.title('Note')  # Título da janela
@@ -56,18 +67,30 @@ class Note:
         self.root.bind('<Control-Button-4>', self._zoom_in)  # Zoom in
         self.root.bind('<Control-Button-5>', self._zoom_out)  # Zoom out
 
+<<<<<<< HEAD
         # Barra de status para mostrar linha e coluna do cursor
+=======
+        # Barra de status para linha e coluna
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         self.status_bar = Label(self.root, text='Line: 1 | Column: 1', anchor='e')
         self.status_bar.grid(sticky=S + E + W)
         self.text_area.bind('<KeyRelease>', self._column_row)
 
+<<<<<<< HEAD
         # Menu para alterar fontes
+=======
+        # Menu de fontes
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         self.font_menu = Menu(self.menu_bar, tearoff=0)
         for font in FONTS:  # Adiciona cada fonte disponível ao menu
             self.font_menu.add_command(label=font, command=lambda f=font: self._font(f))
         self.menu_bar.add_cascade(label='Fontes', menu=self.font_menu)
 
+<<<<<<< HEAD
         # Modo escuro/claro
+=======
+        # Modo escuro
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         self.dark_mode = False
         self.sun_icon = '☼'
         self.moon_icon = '☽'
@@ -76,19 +99,37 @@ class Note:
         self.menu_bar.add_command(label=self.moon_icon, command=self._toggle_dark_mode)
 
     def run(self):
+<<<<<<< HEAD
         """Inicia o loop principal do Tkinter."""
+=======
+        """
+        Inicia o loop principal da interface gráfica.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         self.root.mainloop()
 
     @confirm
     def _newfile(self):
+<<<<<<< HEAD
         """Cria um novo arquivo, limpando a área de texto."""
+=======
+        """
+        Cria um novo arquivo, limpando a área de texto.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         self.root.title('Sem título - Note')
         self.file = None
         self.text_area.delete(1.0, END)
 
     @confirm
     def _openfile(self):
+<<<<<<< HEAD
         """Abre um arquivo existente para edição."""
+=======
+        """
+        Abre um arquivo existente e carrega seu conteúdo na área de texto.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         self.file = askopenfilename(defaultextension='.txt', filetypes=[('Text Documents', '*.txt')])
         if self.file == '':
             self.file = None
@@ -99,7 +140,13 @@ class Note:
                 self.text_area.insert(1.0, file.read())
 
     def _savefile(self):
+<<<<<<< HEAD
         """Salva o conteúdo atual no arquivo."""
+=======
+        """
+        Salva o conteúdo da área de texto no arquivo atual. Se não houver um arquivo atual, abre a caixa de diálogo para salvar como.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         if self.file is None:
             self.file = asksaveasfilename(initialfile='Sem título.txt', defaultextension='.txt',
                                           filetypes=[('Text Documents', '*.txt')])
@@ -108,12 +155,24 @@ class Note:
                 file.write(self.text_area.get(1.0, END))
 
     def _insert_datetime(self, event):
+<<<<<<< HEAD
         """Insere a data e hora atuais na posição do cursor."""
+=======
+        """
+        Insere a data e hora atuais na área de texto.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         current_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         self.text_area.insert('end', f"{current_time}\n")
 
     def _column_row(self, event=None):
+<<<<<<< HEAD
         """Atualiza a barra de status com a posição do cursor."""
+=======
+        """
+        Atualiza a barra de status com a linha e coluna atuais do cursor.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         index = self.text_area.index(INSERT)
         parts = index.split('.')
         row = parts[0]
@@ -121,14 +180,26 @@ class Note:
         self.status_bar.config(text=f'Line: {row} | Column: {col}')
 
     def _zoom(self, event):
+<<<<<<< HEAD
         """Gerencia o zoom usando a rolagem do mouse."""
+=======
+        """
+        Ajusta o zoom da área de texto com base no movimento da roda do mouse.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         if event.delta > 0:
             self._zoom_in(event)
         else:
             self._zoom_out(event)
 
     def _zoom_in(self, event):
+<<<<<<< HEAD
         """Aumenta o tamanho da fonte."""
+=======
+        """
+        Aumenta o tamanho da fonte na área de texto.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         current_font = self.text_area['font']
         font_parts = current_font.split()
         font_name = font_parts[0]
@@ -137,7 +208,13 @@ class Note:
         self.text_area.config(font=(font_name, new_size))
 
     def _zoom_out(self, event):
+<<<<<<< HEAD
         """Diminui o tamanho da fonte."""
+=======
+        """
+        Diminui o tamanho da fonte na área de texto.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         current_font = self.text_area['font']
         font_parts = current_font.split()
         font_name = font_parts[0]
@@ -146,7 +223,13 @@ class Note:
         self.text_area.config(font=(font_name, new_size))
 
     def _toggle_dark_mode(self):
+<<<<<<< HEAD
         """Altera entre modo escuro e claro."""
+=======
+        """
+        Alterna entre o modo claro e o modo escuro na área de texto.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         if self.dark_mode:
             self.text_area.config(bg='white', fg='black')
             self.menu_bar.entryconfig(119, label=self.moon_icon)
@@ -157,5 +240,11 @@ class Note:
             self.dark_mode = True
 
     def _font(self, font):
+<<<<<<< HEAD
         """Altera a fonte do texto."""
+=======
+        """
+        Altera a fonte da área de texto.
+        """
+>>>>>>> 8a8fc5a5f39b44cd2cf3fd84b5f941674f476510
         self.text_area.config(font=(font, 12))
